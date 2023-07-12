@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 import ContactForm from './ContactForm/ContactForm';
-
+import css from './App.module.css';
 
 
 class App extends Component {
@@ -28,9 +28,11 @@ class App extends Component {
   }
 
   formSubmitHandler = data => {
-  const { contacts } = this.state;
+  
   const newContact = { ...data, id: nanoid() };
-  this.setState({ contacts: [...contacts, newContact] })
+  this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
   }
 
   render() {
@@ -40,7 +42,7 @@ class App extends Component {
       contact.name.toLowerCase().includes(normalizedFilter))
     
     return (
-      <div>
+      <div className={css.wrapper}>
         <h1>Phonebook</h1>
         <ContactForm onFormSubmit={this.formSubmitHandler} contacts={contacts } />
         <h2>Contacts</h2>
