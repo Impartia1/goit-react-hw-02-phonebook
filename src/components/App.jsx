@@ -18,7 +18,7 @@ class App extends Component {
   }
   
   changeFilter = e => {
-    this.setState({ ...this.state, filter: e.target.value });
+    this.setState({ filter: e.target.value });
   }
 
   deleteContact = contactId => {
@@ -27,7 +27,7 @@ class App extends Component {
     }))
   }
 
-  formSubmitHandler = data => {
+  addContact = data => {
   
   const newContact = { ...data, id: nanoid() };
   this.setState(prevState => ({
@@ -44,7 +44,7 @@ class App extends Component {
     return (
       <div className={css.wrapper}>
         <h1>Phonebook</h1>
-        <ContactForm onFormSubmit={this.formSubmitHandler} contacts={contacts } />
+        <ContactForm onFormSubmit={this.addContact} contacts={contacts } />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter}/>
         <ContactList contacts={visibleContacts} onDeleteContact={this.deleteContact} />
